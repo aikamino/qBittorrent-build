@@ -1,6 +1,7 @@
 name: CI - Ubuntu
 
-on: [pull_request, push]
+on:
+  workflow_dispatch:
 
 permissions:
   actions: write
@@ -17,11 +18,11 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        libt_version: ["2.0.8", "1.2.18"]
-        qbt_gui: ["GUI=ON", "GUI=OFF"]
+        libt_version: ["2.0.8"]
+        qbt_gui: ["GUI=OFF"]
         qt_version: ["5.15.2", "6.2.0"]
         exclude:
-          - libt_version: "1.2.18"
+          - libt_version: "2.0.8"
             qt_version: "6.2.0"
 
     steps:
@@ -33,7 +34,7 @@ jobs:
           sudo apt update
           sudo apt install \
             build-essential cmake ninja-build pkg-config \
-            libboost-dev libssl-dev zlib1g-dev
+            libboost-dev libssl-dev zlib1g-dev crossbuild-essential-arm64
 
       - name: Setup ccache
         uses: Chocobo1/setup-ccache-action@v1
