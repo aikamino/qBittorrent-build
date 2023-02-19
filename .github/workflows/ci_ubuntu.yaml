@@ -62,7 +62,8 @@ jobs:
             -G "Ninja" \
             -DCMAKE_BUILD_TYPE=RelWithDebInfo \
             -DCMAKE_EXPORT_COMPILE_COMMANDS=ON \
-            -Ddeprecated-functions=OFF
+            -Ddeprecated-functions=OFF \
+            -DCMAKE_TOOLCHAIN_FILE=../CrossCompileAarch64.cmake
           cmake --build build
           sudo cmake --install build
 
@@ -79,7 +80,8 @@ jobs:
             -DCMAKE_INSTALL_PREFIX="/usr" \
             -DTESTING=ON \
             -DVERBOSE_CONFIGURE=ON \
-            -D${{ matrix.qbt_gui }}
+            -D${{ matrix.qbt_gui }} \
+            -DCMAKE_TOOLCHAIN_FILE=../CrossCompileAarch64.cmake
           cmake --build build --target qbt_update_translations
           cmake --build build
           cmake --build build --target check
@@ -99,7 +101,8 @@ jobs:
             -DQT6=ON \
             -DTESTING=ON \
             -DVERBOSE_CONFIGURE=ON \
-            -D${{ matrix.qbt_gui }}
+            -D${{ matrix.qbt_gui }} \
+            -DCMAKE_TOOLCHAIN_FILE=../CrossCompileAarch64.cmake
           cmake --build build --target qbt_update_translations
           cmake --build build
           cmake --build build --target check
